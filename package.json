@@ -36,5 +36,16 @@
       "babel-register"
     ],
     "babel": "inherit"
-  }
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxnblk/funcup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jxnblk/funcup/issues"
+  },
+  "homepage": "https://github.com/jxnblk/funcup#readme"
 }

@@ -1,0 +1,40 @@
+{
+  "name": "funcup",
+  "version": "1.0.0-0",
+  "description": "Simple functional setState for React",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "babel src -d dist",
+    "test": "ava"
+  },
+  "keywords": [
+    "react",
+    "state",
+    "functional",
+    "hoc"
+  ],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "enzyme": "^2.8.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  }
+}

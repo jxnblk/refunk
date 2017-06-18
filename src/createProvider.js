@@ -18,9 +18,9 @@ const provider = (initialState = {}) => Component => {
       }
     }
 
-    constructor () {
-      super()
-      this.state = initialState
+    constructor (props) {
+      super(props)
+      this.state = { ...props, ...initialState }
 
       this.update = fn => this.setState(fn)
     }

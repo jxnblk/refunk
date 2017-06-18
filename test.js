@@ -67,3 +67,8 @@ test('Provider.update() sets state', t => {
   }))
   t.is(wrapper.state().count, 32)
 })
+
+test('Provider adds props to initial state', t => {
+  const wrapper = shallow(<Provider foo='hello' />)
+  t.is(wrapper.state().foo, 'hello')
+})

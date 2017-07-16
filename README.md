@@ -1,16 +1,64 @@
 
-# Refunk :headphones:
+# Refunk 🎧
 
 Simple React functional setState
+
+<http://jxnblk.com/refunk>
 
 ```sh
 npm i refunk
 ```
 
+## Demo
+
+```..jsx
+// import React from 'react'
+// import { createProvider, connect } from 'refunk'
+
+const initialState = {
+  count: 0
+}
+
+// Pass the initial state and root component to createProvider
+// to create a stateful component
+const App = createProvider(initialState)(props => (
+  <div>
+    <h1>count: {props.count}</h1>
+    <Controls />
+  </div>
+))
+
+// Choose which parts of the state to pass to the Controls component
+const mapState = state => ({
+  count: state.count
+})
+
+// Updaters are functions that return state
+const dec = state => ({ count: state.count - 1 })
+const inc = state => ({ count: state.count + 1 })
+
+// Connect the Controls component
+const Controls = connect(mapState)(props => (
+  <div>
+    <samp>{props.count}</samp>
+    <button onClick={e => props.update(dec)}>
+      -
+    </button>
+    <button onClick={e => props.update(inc)}>
+      +
+    </button>
+  </div>
+))
+
+render(<App />)
+```
 
 ## Usage
 
 ### Provider
+
+The Provider shoule be the root stateful component in your application.
+Use the `createProvider` higher order component to create one.
 
 ```jsx
 // App.js
@@ -33,6 +81,9 @@ export default createProvider(initialState)(App)
 ```
 
 ### Connect
+
+Child components can use the `connect` higher order component to pass items from state as props
+and to use the `props.update()` function to update state.
 
 ```jsx
 // Counter.js
@@ -62,6 +113,9 @@ export default connect(map)(Counter)
 ```
 
 ### Updaters
+
+Updaters are functions that are passed to the `props.update()` function.
+An updater function takes `state` as its only argument and returns a new state.
 
 ```jsx
 // updaters.js
@@ -117,10 +171,6 @@ const initialState = {
 export default createProvider(initialState)(App)
 ```
 
-## Examples
-
-See the [examples](examples) directory
-
 ## Concepts
 
 Refunk is meant as a simpler, smaller alternative to other state
@@ -129,9 +179,14 @@ Refunk uses higher-order components and React's built-in state management along 
 [functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
 to help promote the separation of presentational and container components,
 and to keep state updating logic outside of the components themselves.
+
 This library also promotes keeping application state in a single location,
 similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](http://redux.js.org/).
 
 
+---
+
+[GitHub](https://github.com/jxnblk/refunk)
+[Made by Jxnblk](http://jxnblk.com)
 
 MIT License

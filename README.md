@@ -1,7 +1,7 @@
 
 # Refunk 🍨
 
-Simple functional setState for React
+Simple React functional setState
 
 ```sh
 npm i refunk

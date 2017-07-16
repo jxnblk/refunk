@@ -1,10 +1,10 @@
 
-# funcup 🍨
+# Refunk 🍨
 
 Simple functional setState for React
 
 ```sh
-npm i funcup
+npm i refunk
 ```
 
 
@@ -16,7 +16,7 @@ npm i funcup
 // App.js
 // Add the createProvider higher-order component to the root component of your application
 import React from 'react'
-import { createProvider } from 'funcup'
+import { createProvider } from 'refunk'
 
 const App = props => (
   <div>
@@ -36,9 +36,9 @@ export default createProvider(initialState)(App)
 
 ```jsx
 // Counter.js
-// connect a sub component to funcup
+// connect a sub component to refunk
 import React from 'react'
-import { connect } from 'funcup'
+import { connect } from 'refunk'
 
 const Counter = props => (
   <div>
@@ -74,7 +74,7 @@ export const increment = state => ({ count: state.count + 1 })
 // Counter.js
 // Use the updater functions in the connected Counter component
 import React from 'react'
-import { connect } from 'funcup'
+import { connect } from 'refunk'
 import { decrement, increment } from './updaters'
 
 const Counter = props => (
@@ -100,7 +100,7 @@ export default connect(map)(Counter)
 // App.js
 // Include the Counter component in App
 import React from 'react'
-import { createProvider } from 'funcup'
+import { createProvider } from 'refunk'
 import Counter from './Counter'
 
 const App = props => (
@@ -123,9 +123,9 @@ See the [examples](examples) directory
 
 ## Concepts
 
-Funcup is meant as a simpler, smaller alternative to other state
+Refunk is meant as a simpler, smaller alternative to other state
 managment libraries that makes use of React's component state.
-Funcup uses higher-order components and React's built-in state management along with
+Refunk uses higher-order components and React's built-in state management along with
 [functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
 to help promote the separation of presentational and container components,
 and to keep state updating logic outside of the components themselves.

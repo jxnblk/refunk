@@ -1,5 +1,5 @@
 import React from 'react'
-import { createProvider } from 'funcup'
+import { createProvider } from 'refunk'
 import Counter from './Counter'
 import List from './List'
 
@@ -9,7 +9,7 @@ const App = (props) => {
       style={{
         padding: 48
       }}>
-      <h1>funcup {props.count}</h1>
+      <h1>refunk {props.count}</h1>
       <Counter />
       <List />
     </div>

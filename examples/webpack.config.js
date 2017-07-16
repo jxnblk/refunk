@@ -10,7 +10,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      'funcup': path.join(__dirname, '../src')
+      'refunk': path.join(__dirname, '../src')
     }
   },
 

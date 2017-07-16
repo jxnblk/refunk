@@ -1,6 +1,6 @@
 {
-  "name": "funcup",
-  "version": "1.0.0-1",
+  "name": "refunk",
+  "version": "1.0.0-2",
   "description": "Simple functional setState for React",
   "main": "dist/index.js",
   "scripts": {
@@ -42,10 +42,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jxnblk/funcup.git"
+    "url": "git+https://github.com/jxnblk/refunk.git"
   },
   "bugs": {
-    "url": "https://github.com/jxnblk/funcup/issues"
+    "url": "https://github.com/jxnblk/refunk/issues"
   },
-  "homepage": "https://github.com/jxnblk/funcup#readme"
+  "homepage": "https://github.com/jxnblk/refunk#readme"
 }

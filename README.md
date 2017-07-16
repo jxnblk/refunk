@@ -57,7 +57,7 @@ render(<App />)
 
 ### Provider
 
-The Provider shoule be the root stateful component in your application.
+The Provider should be the root stateful component in your application.
 Use the `createProvider` higher order component to create one.
 
 ```jsx

@@ -6,7 +6,8 @@
   "scripts": {
     "prepublish": "babel src -d dist",
     "start": "doc README.md -c docs/config.js -d docs",
-    "test": "ava"
+    "cover": "nyc report --reporter=html",
+    "test": "nyc ava"
   },
   "keywords": [
     "react",
@@ -26,6 +27,7 @@
     "babel-register": "^6.24.1",
     "enzyme": "^2.8.2",
     "live-doc": "^1.0.0-8",
+    "nyc": "^11.2.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4"

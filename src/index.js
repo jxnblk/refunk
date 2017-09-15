@@ -17,15 +17,12 @@ const connect = Component => {
       super()
 
       this.child = isChild(context)
-      console.log(this.child, props, context)
 
       this.state = this.child ? null : {...props}
 
       this.update = this.child
         ? context.update
-        : fn => this.setState(fn, () => {
-          this.listeners.forEach(l => l(this.state))
-        })
+        : fn => this.setState(fn)
     }
 
     getChildContext () {

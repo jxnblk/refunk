@@ -13,32 +13,22 @@ npm i refunk
 
 ```..jsx
 // import React from 'react'
-// import { createProvider, connect } from 'refunk'
+// import connect from 'refunk'
 
-const initialState = {
-  count: 0
-}
-
-// Pass the initial state and root component to createProvider
-// to create a stateful component
-const App = createProvider(initialState)(props => (
+// Create a state provider component
+const App = connect(props => (
   <div>
     <h1>count: {props.count}</h1>
     <Controls />
   </div>
 ))
 
-// Choose which parts of the state to pass to the Controls component
-const mapState = state => ({
-  count: state.count
-})
-
 // Updaters are functions that return state
 const dec = state => ({ count: state.count - 1 })
 const inc = state => ({ count: state.count + 1 })
 
-// Connect the Controls component
-const Controls = connect(mapState)(props => (
+// Connect the Controls component to the App state
+const Controls = connect(props => (
   <div>
     <samp>{props.count}</samp>
     <button onClick={e => props.update(dec)}>
@@ -50,21 +40,24 @@ const Controls = connect(mapState)(props => (
   </div>
 ))
 
-render(<App />)
+const initialState = {
+  count: 0
+}
+
+// initialize state with props
+render(<App {...initialState} />)
 ```
 
 ## Usage
 
-### Provider
+### State Provider
 
-The Provider should be the root stateful component in your application.
-Use the `createProvider` higher order component to create one.
+Use the Refunk higher order component to create a stateful component at the root of your application.
 
 ```jsx
 // App.js
-// Add the createProvider higher-order component to the root component of your application
 import React from 'react'
-import { createProvider } from 'refunk'
+import connect from 'refunk'
 
 const App = props => (
   <div>
@@ -72,24 +65,33 @@ const App = props => (
   </div>
 )
 
-// pass initial state to the provider
+export default connect(App)
+```
+
+```jsx
+import React from 'react'
+import { render } from 'react-dom'
+import App from './App'
+
+// pass initial state to the provider component as props
 const initialState = {
   count: 0
 }
 
-export default createProvider(initialState)(App)
+render(<App {...initialState} />, app)
 ```
+
 
 ### Connect
 
-Child components can use the `connect` higher order component to pass items from state as props
-and to use the `props.update()` function to update state.
+Use the same higher order component to connect a child component to its parent state.
+This will pass the parent's state as props along with an `update` function.
 
 ```jsx
 // Counter.js
-// connect a sub component to refunk
+// connect a child component to refunk
 import React from 'react'
-import { connect } from 'refunk'
+import connect from 'refunk'
 
 const Counter = props => (
   <div>
@@ -103,13 +105,7 @@ const Counter = props => (
   </div>
 )
 
-// choose which parts of the state are passed
-// to the Counter component with a map function
-const map = state => ({
-  count: state.count
-})
-
-export default connect(map)(Counter)
+export default connect(Counter)
 ```
 
 ### Updaters
@@ -128,7 +124,7 @@ export const increment = state => ({ count: state.count + 1 })
 // Counter.js
 // Use the updater functions in the connected Counter component
 import React from 'react'
-import { connect } from 'refunk'
+import connect from 'refunk'
 import { decrement, increment } from './updaters'
 
 const Counter = props => (
@@ -143,18 +139,14 @@ const Counter = props => (
   </div>
 )
 
-const map = state => ({
-  count: state.count
-})
-
-export default connect(map)(Counter)
+export default connect(Counter)
 ```
 
 ```jsx
 // App.js
 // Include the Counter component in App
 import React from 'react'
-import { createProvider } from 'refunk'
+import connect from 'refunk'
 import Counter from './Counter'
 
 const App = props => (
@@ -164,17 +156,13 @@ const App = props => (
   </div>
 )
 
-const initialState = {
-  count: 0
-}
-
-export default createProvider(initialState)(App)
+export default connect(App)
 ```
 
 ## Concepts
 
 Refunk is meant as a simpler, smaller alternative to other state
-managment libraries that makes use of React's component state.
+managment libraries that makes use of React's built-in component state.
 Refunk uses higher-order components and React's built-in state management along with
 [functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
 to help promote the separation of presentational and container components,
@@ -186,7 +174,4 @@ similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](h
 
 ---
 
-[GitHub](https://github.com/jxnblk/refunk)
-[Made by Jxnblk](http://jxnblk.com)
-
-MIT License
+[GitHub](https://github.com/jxnblk/refunk) | [Made by Jxnblk](http://jxnblk.com) | [MIT License](LICENSE.md)

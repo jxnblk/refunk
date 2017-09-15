@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'refunk'
+import connect from 'refunk'
 import { dec, inc } from './updaters'
 
 const Counter = (props, context) => (
@@ -10,8 +10,4 @@ const Counter = (props, context) => (
   </div>
 )
 
-const map = state => ({
-  count: state.count
-})
-
-export default connect(map)(Counter)
+export default connect(Counter)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'refunk'
+import connect from 'refunk'
 import {
   removeItem,
   addItem,
@@ -37,9 +37,4 @@ const List = props => (
   </div>
 )
 
-const map = state => ({
-  items: state.items,
-  newItem: state.newItem
-})
-
-export default connect(map)(List)
+export default connect(List)

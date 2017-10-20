@@ -159,6 +159,37 @@ const App = props => (
 export default connect(App)
 ```
 
+## Children Function
+
+An alternative API to the higher order component pattern is available with functional children, also known as the *render prop* pattern.
+
+```jsx
+import React from 'react'
+import Refunk from 'refunk/component'
+
+const initialState = {
+  count: 0
+}
+
+const dec = state => ({ count: state.count - 1 })
+const inc = state => ({ count: state.count + 1 })
+
+const App = props => (
+  <Refunk {...initialState}>
+    {({
+      update,
+      ...state
+    }) => (
+      <div>
+        <h1>count: {state.count}</h1>
+        <button onClick={e => update(dec)}>-</button>
+        <button onClick={e => update(inc)}>+</button>
+      </div>
+    )}
+  </Refunk>
+)
+```
+
 ## Concepts
 
 Refunk is meant as a simpler, smaller alternative to other state

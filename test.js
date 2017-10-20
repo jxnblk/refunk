@@ -3,6 +3,7 @@ import React from 'react'
 import { create as render } from 'react-test-renderer'
 import { shallow } from 'enzyme'
 import connect from './src'
+import Refunk from './src/component'
 
 const App = props => (
   <h1>Hello</h1>
@@ -55,4 +56,9 @@ test('Provider.update() sets state', t => {
 test('Provider adds props to initial state', t => {
   const wrapper = shallow(<Provider foo='hello' />)
   t.is(wrapper.state().foo, 'hello')
+})
+
+test('Component renders', t => {
+  const json = render(<Refunk children={() => <div>Hello</div>} />).toJSON()
+  t.snapshot(json)
 })

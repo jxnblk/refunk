@@ -28,7 +28,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
-    "enzyme": "^2.8.2",
     "live-doc": "^1.0.0-8",
     "nyc": "^11.2.1",
     "react": "^16.0.0",

@@ -1,9 +1,11 @@
 import test from 'ava'
 import React from 'react'
 import { create as render } from 'react-test-renderer'
-// import ShallowRenderer from 'react-test-renderer/shallow'
+import ShallowRenderer from 'react-test-renderer/shallow'
 import connect from './src'
 import Refunk from './src/component'
+
+const shallow = new ShallowRenderer()
 
 const App = props => (
   <h1>Hello</h1>
@@ -20,22 +22,24 @@ test('exports a function', t => {
   t.is(typeof connect, 'function')
 })
 
-test.skip('creates a provider', t => {
+test('creates a provider', t => {
   t.notThrows(() => {
     Provider = connect(App)
   })
   const state = { count: 1 }
-    /*
-  const wrapper = shallow(<Provider {...state} />)
-  t.is(wrapper.props().count, 1)
-  t.is(typeof wrapper.props().update, 'function')
-  */
+  shallow.render(<Provider {...state} />)
+  const provider = shallow.getRenderOutput()
+  t.is(provider.props.count, 1)
+  t.is(typeof provider.props.update, 'function')
 })
 
-test.skip('connects child components', t => {
+test('connects child components', t => {
   t.notThrows(() => {
     Sub = connect(Container)
   })
+  shallow.render(<Sub />)
+  const sub = shallow.getRenderOutput()
+  console.log(sub)
     /*
   const wrapper = shallow(<Sub />, {
     context: {

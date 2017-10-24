@@ -1,12 +1,8 @@
-const {
-  createProvider,
-  connect
-} = require('../dist')
+const connect = require('../dist').default
 
 module.exports = {
   title: 'Refunk',
   scope: {
-    createProvider,
     connect
   }
 }

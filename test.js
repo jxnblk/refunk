@@ -39,7 +39,6 @@ test('connects child components', t => {
   })
   shallow.render(<Sub />)
   const sub = shallow.getRenderOutput()
-  console.log(sub)
     /*
   const wrapper = shallow(<Sub />, {
     context: {

@@ -3,17 +3,15 @@
 
 Simple React functional setState
 
-<http://jxnblk.com/refunk>
-
 ```sh
 npm i refunk
 ```
 
 ## Demo
 
-```..jsx
-// import React from 'react'
-// import connect from 'refunk'
+```jsx
+import React from 'react'
+import connect from 'refunk'
 
 // Create a state provider component
 const App = connect(props => (
@@ -159,6 +157,39 @@ const App = props => (
 export default connect(App)
 ```
 
+## Render prop
+
+An alternative API to the higher order component pattern is available with the *render prop* pattern.
+
+Note: this is simply a wrapper around the core HOC to provide a different API and works the same as the default HOC version.
+
+```jsx
+import React from 'react'
+import Refunk from 'refunk/component'
+
+const initialState = {
+  count: 0
+}
+
+const dec = state => ({ count: state.count - 1 })
+const inc = state => ({ count: state.count + 1 })
+
+const App = props => (
+  <Refunk {...initialState}
+    render={({
+      update,
+      ...state
+    }) => (
+      <div>
+        <h1>count: {state.count}</h1>
+        <button onClick={e => update(dec)}>-</button>
+        <button onClick={e => update(inc)}>+</button>
+      </div>
+    )}
+  />
+)
+```
+
 ## Concepts
 
 Refunk is meant as a simpler, smaller alternative to other state
@@ -171,6 +202,12 @@ and to keep state updating logic outside of the components themselves.
 This library also promotes keeping application state in a single location,
 similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](http://redux.js.org/).
 
+### Related
+
+- [microstate](https://github.com/estrattonbailey/microstate)
+- [statty](https://github.com/vesparny/statty)
+- [unistore](https://github.com/developit/unistore)
+- [redux](https://github.com/reactjs/redux)
 
 ---
 

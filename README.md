@@ -9,9 +9,9 @@ npm i refunk
 
 ## Demo
 
-```..jsx
-// import React from 'react'
-// import connect from 'refunk'
+```jsx
+import React from 'react'
+import connect from 'refunk'
 
 // Create a state provider component
 const App = connect(props => (

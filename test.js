@@ -66,6 +66,6 @@ test.skip('Provider adds props to initial state', t => {
 })
 
 test('Component renders', t => {
-  const json = render(<Refunk children={() => <div>Hello</div>} />).toJSON()
+  const json = render(<Refunk render={() => <div>Hello</div>} />).toJSON()
   t.snapshot(json)
 })

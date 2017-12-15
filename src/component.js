@@ -4,12 +4,12 @@ import connect from './index'
 
 class Refunk extends React.Component {
   render () {
-    return this.props.children(this.props)
+    return this.props.render(this.props)
   }
 }
 
 Refunk.propTypes = {
-  children: PropTypes.func.isRequired
+  render: PropTypes.func.isRequired
 }
 
 export default connect(Refunk)

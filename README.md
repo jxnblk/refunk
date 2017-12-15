@@ -159,9 +159,11 @@ const App = props => (
 export default connect(App)
 ```
 
-## Children Function
+## Render prop
 
 An alternative API to the higher order component pattern is available with functional children, also known as the *render prop* pattern.
+
+Note: this is simply a wrapper around the core HOC to provide a different API and works the same as the default HOC version.
 
 ```jsx
 import React from 'react'
@@ -175,8 +177,8 @@ const dec = state => ({ count: state.count - 1 })
 const inc = state => ({ count: state.count + 1 })
 
 const App = props => (
-  <Refunk {...initialState}>
-    {({
+  <Refunk {...initialState}
+    render={({
       update,
       ...state
     }) => (
@@ -186,7 +188,7 @@ const App = props => (
         <button onClick={e => update(inc)}>+</button>
       </div>
     )}
-  </Refunk>
+  />
 )
 ```
 
@@ -202,6 +204,12 @@ and to keep state updating logic outside of the components themselves.
 This library also promotes keeping application state in a single location,
 similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](http://redux.js.org/).
 
+### Related
+
+- [microstate](https://github.com/estrattonbailey/microstate)
+- [statty](https://github.com/vesparny/statty)
+- [unistore](https://github.com/developit/unistore)
+- [redux](https://github.com/reactjs/redux)
 
 ---
 

@@ -161,7 +161,7 @@ export default connect(App)
 
 ## Render prop
 
-An alternative API to the higher order component pattern is available with functional children, also known as the *render prop* pattern.
+An alternative API to the higher order component pattern is available with the *render prop* pattern.
 
 Note: this is simply a wrapper around the core HOC to provide a different API and works the same as the default HOC version.
 

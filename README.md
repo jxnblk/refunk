@@ -3,8 +3,6 @@
 
 Simple React functional setState
 
-<http://jxnblk.com/refunk>
-
 ```sh
 npm i refunk
 ```

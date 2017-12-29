@@ -13,6 +13,14 @@ const connect = Component => {
       update: PropTypes.func
     }
 
+    static propTypes = {
+      mapState: PropTypes.func
+    }
+
+    static defaultProps = {
+      mapState: n => n
+    }
+
     constructor (props, context) {
       super()
 
@@ -33,10 +41,11 @@ const connect = Component => {
     }
 
     render () {
-      const state = this.child ? this.context.state : this.state
+      const { mapState } = this.props
+      const state = this.child ? this.context.state : mapState({...this.state})
+
       return (
         <Component
-          {...this.props}
           {...state}
           update={this.update}
         />

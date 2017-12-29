@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const noop = n => n
+
 const connect = Component => {
   class RefunkState extends React.Component {
     static childContextTypes = {
@@ -18,7 +20,7 @@ const connect = Component => {
     }
 
     static defaultProps = {
-      mapState: n => n
+      mapState: noop
     }
 
     constructor (props, context) {
@@ -41,7 +43,7 @@ const connect = Component => {
     }
 
     render () {
-      const { mapState } = this.props
+      const { mapState = noop } = this.props
       const state = this.child ? this.context.state : this.state
       const props = mapState(state)
 

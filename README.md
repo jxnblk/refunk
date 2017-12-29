@@ -157,6 +157,27 @@ const App = props => (
 export default connect(App)
 ```
 
+## mapState
+
+To calculate props based on state, use the `mapState` prop.
+
+```jsx
+const colors = [
+  'cyan',
+  'magenta',
+  'yellow'
+]
+const mapState = state => ({
+  ...state,
+  color: colors[state.count % colors.length]
+})
+
+<App
+  count={0}
+  mapState={mapState}
+/>
+```
+
 ## Render prop
 
 An alternative API to the higher order component pattern is available with the *render prop* pattern.

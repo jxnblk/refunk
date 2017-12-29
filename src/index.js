@@ -42,11 +42,12 @@ const connect = Component => {
 
     render () {
       const { mapState } = this.props
-      const state = this.child ? this.context.state : mapState({...this.state})
+      const state = this.child ? this.context.state : this.state
+      const props = mapState(state)
 
       return (
         <Component
-          {...state}
+          {...props}
           update={this.update}
         />
       )

@@ -1,6 +1,6 @@
 {
   "name": "refunk",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Simple functional setState for React",
   "main": "dist/index.js",
   "scripts": {

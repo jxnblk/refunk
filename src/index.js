@@ -30,9 +30,18 @@ const connect = Component => {
 
       this.state = this.child ? null : {...props}
 
+      this.functionalUpdate = (fn, cb) => {
+        const { mapState = noop } = this.props
+        const mapped = mapState(this.state)
+        const next = typeof fn === 'function'
+          ? fn(mapped)
+          : fn
+        this.setState(next, cb)
+      }
+
       this.update = this.child
         ? context.update
-        : fn => this.setState(fn)
+        : this.functionalUpdate
     }
 
     getChildContext () {

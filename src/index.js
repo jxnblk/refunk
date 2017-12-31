@@ -36,8 +36,9 @@ const connect = Component => {
     }
 
     getChildContext () {
+      const { mapState = noop } = this.props
       return this.child ? this.context : {
-        state: this.state,
+        state: mapState(this.state),
         update: this.update
       }
     }

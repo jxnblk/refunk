@@ -59,6 +59,7 @@ const connect = Component => {
 
       return (
         <Component
+          {...this.props}
           {...props}
           update={this.update}
         />

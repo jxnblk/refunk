@@ -5,12 +5,11 @@ const Context = React.createContext(null)
 export const Consumer = Context.Consumer
 
 export class Provider extends React.Component {
+  state = {}
   update = (...args) => this.setState(...args)
 
-  constructor (props) {
-    super()
-    const { children, ...rest } = props
-    this.state = rest
+  static getDerivedStateFromProps ({ children, ...state }) {
+    return state
   }
 
   render () {

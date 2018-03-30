@@ -30,9 +30,9 @@
     "babel-register": "^6.24.1",
     "live-doc": "^1.0.0-8",
     "nyc": "^11.2.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-test-renderer": "^16.3.0"
   },
   "dependencies": {
     "prop-types": "^15.5.10"

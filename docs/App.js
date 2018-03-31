@@ -1,55 +1,9 @@
 import React from 'react'
-// import connect from '../src'
-
 import {
   Provider,
   Consumer,
   connect
-} from '../src/next'
-
-const xApp = connect(props => [
-  <meta charSet='utf-8' />,
-  <title>Refunk</title>,
-  <meta name='viewport' content='width=device-width,initial-scale=1' />,
-  <div>
-    <h1>Refunk</h1>
-    <samp>{props.count}</samp>
-    <button
-      onClick={e => props.update(dec)}
-      children='-'
-    />
-    <button
-      onClick={e => props.update(inc)}
-      children='+'
-    />
-  </div>
-])
-
-const _App = props => (
-  <Provider {...props}>
-    <head>
-      <meta charSet='utf-8' />
-      <title>Refunk</title>
-      <meta name='viewport' content='width=device-width,initial-scale=1' />
-    </head>
-    <Consumer>
-      {state => (
-        <div>
-          <h1>Refunk</h1>
-          <samp>{state.count}</samp>
-          <button
-            onClick={e => state.update(dec)}
-            children='-'
-          />
-          <button
-            onClick={e => state.update(inc)}
-            children='+'
-          />
-        </div>
-      )}
-    </Consumer>
-  </Provider>
-)
+} from '../src'
 
 const App = connect(props => (
   <React.Fragment>
@@ -69,7 +23,7 @@ const App = connect(props => (
     <Consumer>
       {state => (
         <div>
-          Consumer
+          Consumer {typeof Consumer}
           <pre>{Object.keys(state).join(', ')}</pre>
           <pre children={JSON.stringify(state, null, 2)} />
         </div>

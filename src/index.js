@@ -1,78 +1,44 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const noop = n => n
+const Context = React.createContext(null)
 
-const connect = Component => {
-  class RefunkState extends React.Component {
-    static childContextTypes = {
-      state: PropTypes.object,
-      update: PropTypes.func
-    }
+export const Consumer = Context.Consumer
 
-    static contextTypes = {
-      state: PropTypes.object,
-      update: PropTypes.func
-    }
+export class Provider extends React.Component {
+  update = (...args) => this.setState(...args)
 
-    static propTypes = {
-      mapState: PropTypes.func
-    }
-
-    static defaultProps = {
-      mapState: noop
-    }
-
-    constructor (props, context) {
-      super()
-
-      this.child = isChild(context)
-
-      this.state = this.child ? null : {...props}
-
-      this.functionalUpdate = (fn, cb) => {
-        const { mapState = noop } = this.props
-        const mapped = mapState(this.state)
-        const next = typeof fn === 'function'
-          ? fn(mapped)
-          : fn
-        this.setState(next, cb)
-      }
-
-      this.update = this.child
-        ? context.update
-        : this.functionalUpdate
-    }
-
-    getChildContext () {
-      const { mapState = noop } = this.props
-      return this.child ? this.context : {
-        state: mapState(this.state),
-        update: this.update
-      }
-    }
-
-    render () {
-      const { mapState = noop } = this.props
-      const state = this.child ? this.context.state : this.state
-      const props = mapState(state)
-
-      return (
-        <Component
-          {...this.props}
-          {...props}
-          update={this.update}
-        />
-      )
-    }
+  constructor (props) {
+    super()
+    const { children, ...rest } = props
+    this.state = rest
   }
 
-  return RefunkState
+  render () {
+    const value = {
+      ...this.state,
+      update: this.update
+    }
+
+    return (
+      <Context.Provider value={value}>
+        {this.props.children}
+      </Context.Provider>
+    )
+  }
 }
 
-const isChild = (context) => (
-  typeof context.state === 'object'
-  && typeof context.update === 'function'
+export const connect = Component => props => (
+  <Consumer>
+    {maybeState => maybeState ? (
+      <Component {...maybeState} />
+    ) : (
+      <Provider {...props}>
+        <Consumer>
+          {state => (
+            <Component {...state} />
+          )}
+        </Consumer>
+      </Provider>
+    )}
+  </Consumer>
 )
-
-export default connect

@@ -34,12 +34,19 @@ test('Provider.update() sets state', t => {
 
 test('Nested components get state from parent', t => {
   const Nested = connect(props => <pre>{props.count}</pre>)
-  const root = render(
+  const json = render(
     <Provider count={1}>
       <Nested count={3} />
     </Provider>
-  ).root
-  const nested = root.findByType(Nested)
-  t.is(nested.children[0].props.count, 1)
+  ).toJSON()
+  t.is(json.children[0], '1')
+})
+
+test('Unnested components create their own Provider', t => {
+  const Unnested = connect(props => <pre>{props.count}</pre>)
+  const json = render(
+    <Unnested count={3} />
+  ).toJSON()
+  t.is(json.children[0], '3')
 })
 

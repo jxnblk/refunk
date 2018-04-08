@@ -2,16 +2,21 @@ import React from 'react'
 
 const Context = React.createContext(null)
 
-export const Consumer = Context.Consumer
+export const Consumer = props => <Context.Consumer {...props} />
+
+const omit = (obj, keys) => {
+  const next = {}
+  for (let key in obj) {
+    if (keys.indexOf(key) > -1) continue
+    next[key] = obj[key]
+  }
+  return next
+}
 
 export class Provider extends React.Component {
-  update = (...args) => this.setState(...args)
+  state = omit(this.props, 'children')
 
-  constructor (props) {
-    super()
-    const { children, ...rest } = props
-    this.state = rest
-  }
+  update = (...args) => this.setState(...args)
 
   render () {
     const value = {

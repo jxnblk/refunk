@@ -52,8 +52,49 @@ render(<App {...initialState} />)
 ## Usage
 
 ### connect
+
+The `connect` higher-order component creates state based on props for top-level components or connects into a parent Refunk component's state when nested.
+This allows for the creation of stateful components that can work standalone or listen to a parent's state.
+
 ### Provider
+
+For lower-level access to React's context API, the Provider component can be used to create a context.
+The Refunk Provider will convert props to initial state and provide the state and `update` function through context.
+
+```jsx
+import React from 'react'
+import { Provider } from 'refunk'
+
+const App = props => (
+  <Provider count={0}>
+    <div />
+  </Provider>
+)
+```
+
 ### Consumer
+
+The context Consumer is also exported for lower-level access to the context API.
+
+```jsx
+import React from 'react'
+import { Provider, Consumer } from 'refunk'
+
+const inc = state => ({ count: state.count + 1 })
+
+const App = props => (
+  <Provider count={0}>
+    <Consumer>
+      {state => (
+        <React.Fragment>
+          <samp>{state.count}</samp>
+          <button onClick={e => state.update(inc)}>+</button>
+        </React.Fragment>
+      )}
+    </Consumer>
+  </Provider>
+)
+```
 
 <!--
 ### Updaters
@@ -113,7 +154,7 @@ export default connect(App)
 
 Refunk is meant as a simpler, smaller alternative to other state
 managment libraries that makes use of React's built-in component state.
-Refunk uses higher-order components and React's built-in state management along with
+Refunk uses higher-order components, the new [context API][context], and React component state management along with
 [functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
 to help promote the separation of presentational and container components,
 and to keep state updating logic outside of the components themselves.

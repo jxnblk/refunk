@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box } from 'grid-styled'
 import {
   Provider,
   Consumer,
@@ -7,7 +8,7 @@ import {
 
 const App = connect(props => (
   <React.Fragment>
-    <div>
+    <Box p={4}>
       <h1>Refunk</h1>
       <samp>{props.count}</samp>
       <button
@@ -18,28 +19,28 @@ const App = connect(props => (
         onClick={e => props.update(inc)}
         children='+'
       />
-    </div>
+    </Box>
     <Nested />
     <Consumer>
       {state => (
-        <div>
+        <Box p={4}>
           Consumer {typeof Consumer}
           <pre>{Object.keys(state).join(', ')}</pre>
           <pre children={JSON.stringify(state, null, 2)} />
-        </div>
+        </Box>
       )}
     </Consumer>
   </React.Fragment>
 ))
 
 const Nested = connect(props => (
-  <div>
+  <Box p={4}>
     <h2>Nested</h2>
     <pre>{props.count}</pre>
     <button onClick={e => props.update(inc)}>
       INC
     </button>
-  </div>
+  </Box>
 ))
 
 const dec = state => ({ count: state.count - 1 })
@@ -49,18 +50,4 @@ App.defaultProps = {
   count: 0
 }
 
-const css = `
-* { box-sizing: border-box }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 48px;
-  color: #000;
-  background-color: #fff;
-}
-`
-
-// export default App
-//
 export default props => <App />

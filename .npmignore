@@ -1,2 +1,5 @@
+src
 docs
 examples
+.nyc_output
+coverage

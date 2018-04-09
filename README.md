@@ -61,6 +61,23 @@ that can be shared across many parts of an application.
 The `connect` higher-order component creates state based on props for top-level components or connects into a parent Refunk component's state when nested.
 This allows for the creation of stateful components that can work standalone or listen to a parent's state.
 
+```jsx
+import React from 'react'
+import { connect } from 'refunk'
+
+const App = connect(props => (
+  <div>
+    <samp>{props.count}</samp>
+  </div>
+))
+
+App.defaultProps = {
+  count: 0
+}
+
+export default App
+```
+
 ### Provider
 
 For lower-level access to React's context API, the Provider component can be used to create a context.

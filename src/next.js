@@ -41,3 +41,19 @@ export const connect = Component => props => (
     )}
   </Consumer>
 )
+
+export const Refunk = props => (
+  <Consumer>
+    {maybeState => maybeState ? (
+      props.children(maybeState)
+    ) : (
+      <Provider {...props}>
+        <Consumer>
+          {state => (
+            props.children(state)
+          )}
+        </Consumer>
+      </Provider>
+    )}
+  </Consumer>
+)

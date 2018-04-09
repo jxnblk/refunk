@@ -4,7 +4,6 @@
 Simple React functional setState
 with the new [React context API][context] (requires React v16.3 or later)
 
-[context]: https://reactjs.org/docs/context.html
 
 ```sh
 npm i refunk
@@ -51,6 +50,12 @@ render(<App {...initialState} />)
 
 ## Usage
 
+Refunk components initialize state from props and provide an `update` function to their consumers.
+When nesting Refunk components, the top-most component will control state for any child Refunk components.
+
+The `update` function works the same as `setState`, but it's intended to be used with separate [updater functions](#using-updaters),
+that can be shared across many parts of an application.
+
 ### connect
 
 The `connect` higher-order component creates state based on props for top-level components or connects into a parent Refunk component's state when nested.
@@ -96,8 +101,7 @@ const App = props => (
 )
 ```
 
-<!--
-### Updaters
+### Using Updaters
 
 Updaters are functions that are passed to the `props.update()` function.
 An updater function takes `state` as its only argument and returns a new state.
@@ -147,7 +151,6 @@ const App = props => (
 
 export default connect(App)
 ```
--->
 
 
 ## Concepts
@@ -155,21 +158,27 @@ export default connect(App)
 Refunk is meant as a simpler, smaller alternative to other state
 managment libraries that makes use of React's built-in component state.
 Refunk uses higher-order components, the new [context API][context], and React component state management along with
-[functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
+[functional setState][setState]
 to help promote the separation of presentational and container components,
 and to keep state updating logic outside of the components themselves.
 
 This library also promotes keeping application state in a single location,
-similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](http://redux.js.org/).
+similar to other [Flux][flux] libraries and [Redux][redux].
+
 
 ### Related
 
 - [microstate](https://github.com/estrattonbailey/microstate)
 - [statty](https://github.com/vesparny/statty)
 - [unistore](https://github.com/developit/unistore)
-- [redux](https://github.com/reactjs/redux)
+- [redux][redux]
 - [unstated](https://github.com/jamiebuilds/unstated)
+
+[context]: https://reactjs.org/docs/context.html
+[setState]: https://facebook.github.io/react/docs/react-component.html#setstate
+[flux]: http://facebook.github.io/flux/
+[redux]: http://redux.js.org/
 
 ---
 
-[GitHub](https://github.com/jxnblk/refunk) | [Made by Jxnblk](http://jxnblk.com) | [MIT License](LICENSE.md)
+[Made by Jxnblk](http://jxnblk.com) | [MIT License](LICENSE.md)

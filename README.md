@@ -169,6 +169,12 @@ const App = props => (
 export default connect(App)
 ```
 
+## Build Your Own
+
+Refunk's [source](src) is only about 50 LOC and relies on built-in React functionality.
+This library is intended to be used directly as a package and also to serve as an example of some ways to handle state in a React application.
+Feel free to fork or steal ideas from this project, and build your own version.
+
 
 ## Concepts
 

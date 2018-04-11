@@ -6,6 +6,7 @@
   "scripts": {
     "prepublish": "babel src -d dist",
     "start": "ok docs/App.js -op 9000",
+    "size": "bundlesize",
     "cover": "nyc report --reporter=html",
     "test": "nyc ava"
   },
@@ -25,6 +26,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
+    "bundlesize": "^0.17.0",
     "grid-styled": "^3.2.1",
     "nyc": "^11.2.1",
     "ok-cli": "^1.0.0-11",
@@ -52,5 +54,15 @@
   "bugs": {
     "url": "https://github.com/jxnblk/refunk/issues"
   },
-  "homepage": "https://github.com/jxnblk/refunk#readme"
+  "homepage": "https://github.com/jxnblk/refunk#readme",
+  "bundlesize": [
+    {
+      "path": "src/index.js",
+      "maxSize": "0.5 kB"
+    },
+    {
+      "path": "dist/index.js",
+      "maxSize": "1.5 kB"
+    }
+  ]
 }

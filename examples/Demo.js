@@ -1,14 +1,15 @@
 import React from 'react'
-import { Box } from 'grid-styled'
 import {
   Provider,
   Consumer,
   connect
 } from '../src'
 
+const Box = props => <div {...props} style={{ padding: 64 }} />
+
 const App = connect(props => (
   <React.Fragment>
-    <Box p={4}>
+    <Box>
       <h1>Refunk</h1>
       <samp>{props.count}</samp>
       <button
@@ -23,7 +24,7 @@ const App = connect(props => (
     <Nested />
     <Consumer>
       {state => (
-        <Box p={4}>
+        <Box>
           Consumer {typeof Consumer}
           <pre>{Object.keys(state).join(', ')}</pre>
           <pre children={JSON.stringify(state, null, 2)} />
@@ -34,7 +35,7 @@ const App = connect(props => (
 ))
 
 const Nested = connect(props => (
-  <Box p={4}>
+  <Box>
     <h2>Nested</h2>
     <pre>{props.count}</pre>
     <button onClick={e => props.update(inc)}>
@@ -50,4 +51,4 @@ App.defaultProps = {
   count: 0
 }
 
-export default props => <App />
+export default App

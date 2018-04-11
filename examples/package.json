@@ -1,7 +1,6 @@
 {
   "name": "refunk-examples",
   "private": true,
-  "version": "1.0.0",
   "scripts": {
     "start": "ok App.js -o"
   },

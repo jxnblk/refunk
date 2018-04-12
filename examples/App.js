@@ -1,9 +1,9 @@
 import React from 'react'
-import connect from 'refunk'
+import { connect } from '..'
 import Counter from './Counter'
 import List from './List'
 
-const App = (props) => (
+const App = connect(props => (
   <div
     style={{
       padding: 48
@@ -12,6 +12,12 @@ const App = (props) => (
     <Counter />
     <List />
   </div>
-)
+))
 
-export default connect(App)
+App.defaultProps = {
+  items: [],
+  newItem: '',
+  count: 0
+}
+
+export default App

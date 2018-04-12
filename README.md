@@ -2,16 +2,18 @@
 # Refunk 🎧
 
 Simple React functional setState
+with the new [React context API][context] (requires React v16.3 or later)
+
 
 ```sh
 npm i refunk
 ```
 
-## Demo
+## Getting Started
 
 ```jsx
 import React from 'react'
-import connect from 'refunk'
+import { connect } from 'refunk'
 
 // Create a state provider component
 const App = connect(props => (
@@ -48,65 +50,75 @@ render(<App {...initialState} />)
 
 ## Usage
 
-### State Provider
+Refunk components initialize state from props and provide an `update` function to their consumers.
+When nesting Refunk components, the top-most component will control state for any child Refunk components.
 
-Use the Refunk higher order component to create a stateful component at the root of your application.
+The `update` function works the same as `setState`, but it's intended to be used with separate [updater functions](#using-updaters),
+that can be shared across many parts of an application.
+
+### connect
+
+The `connect` higher-order component creates state based on props for top-level components or connects into a parent Refunk component's state when nested.
+This allows for the creation of stateful components that can work standalone or listen to a parent's state.
 
 ```jsx
-// App.js
 import React from 'react'
-import connect from 'refunk'
+import { connect } from 'refunk'
 
-const App = props => (
+const App = connect(props => (
   <div>
-    <h1>Hello</h1>
+    <samp>{props.count}</samp>
   </div>
-)
+))
 
-export default connect(App)
-```
-
-```jsx
-import React from 'react'
-import { render } from 'react-dom'
-import App from './App'
-
-// pass initial state to the provider component as props
-const initialState = {
+App.defaultProps = {
   count: 0
 }
 
-render(<App {...initialState} />, app)
+export default App
 ```
 
+### Provider
 
-### Connect
-
-Use the same higher order component to connect a child component to its parent state.
-This will pass the parent's state as props along with an `update` function.
+For lower-level access to React's context API, the Provider component can be used to create a context.
+The Refunk Provider will convert props to initial state and provide the state and `update` function through context.
 
 ```jsx
-// Counter.js
-// connect a child component to refunk
 import React from 'react'
-import connect from 'refunk'
+import { Provider } from 'refunk'
 
-const Counter = props => (
-  <div>
-    <samp>Count: {props.count}</samp>
-    <button>
-      Decrement
-    </button>
-    <button>
-      Increment
-    </button>
-  </div>
+const App = props => (
+  <Provider count={0}>
+    <div />
+  </Provider>
 )
-
-export default connect(Counter)
 ```
 
-### Updaters
+### Consumer
+
+The context Consumer is also exported for lower-level access to the context API.
+
+```jsx
+import React from 'react'
+import { Provider, Consumer } from 'refunk'
+
+const inc = state => ({ count: state.count + 1 })
+
+const App = props => (
+  <Provider count={0}>
+    <Consumer>
+      {state => (
+        <React.Fragment>
+          <samp>{state.count}</samp>
+          <button onClick={e => state.update(inc)}>+</button>
+        </React.Fragment>
+      )}
+    </Consumer>
+  </Provider>
+)
+```
+
+### Using Updaters
 
 Updaters are functions that are passed to the `props.update()` function.
 An updater function takes `state` as its only argument and returns a new state.
@@ -157,79 +169,39 @@ const App = props => (
 export default connect(App)
 ```
 
-## mapState
+## Build Your Own
 
-To calculate props based on state, use the `mapState` prop.
+Refunk's [source](src) is only about 50 LOC and relies on built-in React functionality.
+This library is intended to be used directly as a package and also to serve as an example of some ways to handle state in a React application.
+Feel free to fork or steal ideas from this project, and build your own version.
 
-```jsx
-const colors = [
-  'cyan',
-  'magenta',
-  'yellow'
-]
-const mapState = state => ({
-  ...state,
-  color: colors[state.count % colors.length]
-})
-
-<App
-  count={0}
-  mapState={mapState}
-/>
-```
-
-## Render prop
-
-An alternative API to the higher order component pattern is available with the *render prop* pattern.
-
-Note: this is simply a wrapper around the core HOC to provide a different API and works the same as the default HOC version.
-
-```jsx
-import React from 'react'
-import Refunk from 'refunk/component'
-
-const initialState = {
-  count: 0
-}
-
-const dec = state => ({ count: state.count - 1 })
-const inc = state => ({ count: state.count + 1 })
-
-const App = props => (
-  <Refunk {...initialState}
-    render={({
-      update,
-      ...state
-    }) => (
-      <div>
-        <h1>count: {state.count}</h1>
-        <button onClick={e => update(dec)}>-</button>
-        <button onClick={e => update(inc)}>+</button>
-      </div>
-    )}
-  />
-)
-```
 
 ## Concepts
 
 Refunk is meant as a simpler, smaller alternative to other state
 managment libraries that makes use of React's built-in component state.
-Refunk uses higher-order components and React's built-in state management along with
-[functional setState](https://facebook.github.io/react/docs/react-component.html#setstate)
+Refunk uses higher-order components, the new [context API][context], and React component state management along with
+[functional setState][setState]
 to help promote the separation of presentational and container components,
 and to keep state updating logic outside of the components themselves.
 
 This library also promotes keeping application state in a single location,
-similar to other [Flux](http://facebook.github.io/flux/) libraries and [Redux](http://redux.js.org/).
+similar to other [Flux][flux] libraries and [Redux][redux].
+
 
 ### Related
 
 - [microstate](https://github.com/estrattonbailey/microstate)
 - [statty](https://github.com/vesparny/statty)
 - [unistore](https://github.com/developit/unistore)
-- [redux](https://github.com/reactjs/redux)
+- [redux][redux]
+- [unstated](https://github.com/jamiebuilds/unstated)
+
+[context]: https://reactjs.org/docs/context.html
+[setState]: https://facebook.github.io/react/docs/react-component.html#setstate
+[flux]: http://facebook.github.io/flux/
+[redux]: http://redux.js.org/
 
 ---
 
-[GitHub](https://github.com/jxnblk/refunk) | [Made by Jxnblk](http://jxnblk.com) | [MIT License](LICENSE.md)
+[Made by Jxnblk](http://jxnblk.com) | [MIT License](LICENSE.md)

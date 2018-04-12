@@ -1,51 +1,40 @@
 {
   "name": "refunk",
-  "version": "2.2.4",
+  "version": "3.0.0-0",
   "description": "Simple functional setState for React",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "babel src -d dist",
-    "start": "x0 dev docs/App.js -op 9000",
-    "build": "x0 build docs/App.js -d docs",
+    "size": "bundlesize",
     "cover": "nyc report --reporter=html",
     "test": "nyc ava"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "bundlesize": "^0.17.0",
+    "nyc": "^11.2.1",
+    "react": "^16.3.0",
+    "react-test-renderer": "^16.3.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   },
   "keywords": [
     "react",
     "state",
     "functional",
+    "context",
+    "render-props",
     "hoc"
   ],
   "author": "Brent Jackson",
   "license": "MIT",
-  "devDependencies": {
-    "@compositor/x0": "^2.0.0-8",
-    "ava": "^0.19.1",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "live-doc": "^1.0.0-8",
-    "nyc": "^11.2.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.10"
-  },
-  "ava": {
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
-  },
-  "directories": {
-    "example": "examples"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jxnblk/refunk.git"
@@ -53,5 +42,21 @@
   "bugs": {
     "url": "https://github.com/jxnblk/refunk/issues"
   },
-  "homepage": "https://github.com/jxnblk/refunk#readme"
+  "homepage": "https://github.com/jxnblk/refunk#readme",
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "bundlesize": [
+    {
+      "path": "src/index.js",
+      "maxSize": "0.5 kB"
+    },
+    {
+      "path": "dist/index.js",
+      "maxSize": "1.5 kB"
+    }
+  ]
 }

@@ -35,12 +35,12 @@ export class Provider extends React.Component {
 export const connect = Component => props => (
   <Consumer>
     {maybeState => maybeState ? (
-      <Component {...maybeState} />
+      <Component {...props} {...maybeState} />
     ) : (
       <Provider {...props}>
         <Consumer>
           {state => (
-            <Component {...state} />
+            <Component {...props} {...state} />
           )}
         </Consumer>
       </Provider>

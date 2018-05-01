@@ -134,7 +134,7 @@ export const increment = state => ({ count: state.count + 1 })
 // Counter.js
 // Use the updater functions in the connected Counter component
 import React from 'react'
-import connect from 'refunk'
+import { connect } from 'refunk'
 import { decrement, increment } from './updaters'
 
 const Counter = props => (
@@ -156,7 +156,7 @@ export default connect(Counter)
 // App.js
 // Include the Counter component in App
 import React from 'react'
-import connect from 'refunk'
+import { connect } from 'refunk'
 import Counter from './Counter'
 
 const App = props => (
